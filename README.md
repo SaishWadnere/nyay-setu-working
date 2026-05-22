@@ -156,7 +156,7 @@ Browse [open issues](https://github.com/viru0909-dev/nyay-setu-working/issues) a
 <br/>
 
 <a href="https://github.com/viru0909-dev/nyay-setu-working/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=viru0909-dev/nyay-setu-working" alt="Contributors" />
+  <img src="https://contrib.rocks/image?repo=viru0909-dev/nyay-setu-working&max=500&columns=15" alt="Contributors" />
 </a>
 
 <br/><br/>
