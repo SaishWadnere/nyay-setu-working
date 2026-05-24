@@ -182,7 +182,8 @@ public class SecurityConfig {
                                 "/ai/ollama/status",
                                 "/ai/ollama/models",
                                 "/api/brain/analyze-case",
-                                "/api/brain/suggest-documents"
+                                "/api/brain/suggest-documents",
+                                "/api/brain/chat"
                         ).permitAll()
 
                         // ── Auth-only: any authenticated user ─────────────────────────────
