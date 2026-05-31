@@ -260,10 +260,10 @@
     }
 
     /* Make buttons visible and touch-friendly */
-    button:not(.guest-continue-btn):not(.guest-btn-primary):not(.guest-btn-secondary):not(.guest-btn-ghost),
+    button:not(.guest-continue-btn):not(.guest-btn-primary):not(.guest-btn-secondary):not(.guest-btn-ghost):not(.auth-full-width-btn),
     .next-btn,
     .prev-btn,
-    button[type="submit"],
+    button[type="submit"]:not(.auth-full-width-btn),
     div[class*="button"] {
         min-height: 48px !important;
         padding: 12px 20px !important;
