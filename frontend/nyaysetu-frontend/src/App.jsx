@@ -115,8 +115,11 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return children;
 };
 
+import { useOfflineSync } from './hooks/useOfflineSync';
+
 function App({ swRegistration }) {
     const { initAuth } = useAuthStore();
+    useOfflineSync();
 
     useEffect(() => {
         initAuth();
