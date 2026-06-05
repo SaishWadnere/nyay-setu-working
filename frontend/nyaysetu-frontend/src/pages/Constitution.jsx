@@ -141,7 +141,26 @@ export default function Constitution() {
     };
 
     const handleDownloadPDF = () => {
-        alert(t('pdfComingSoon'));
+        const pdfByLanguage = {
+            en: {
+                href: '/documents/COI_MAY2024.pdf',
+                filename: 'Constitution_of_India_English.pdf',
+            },
+            hi: {
+                href: '/documents/COI_MAY2024_Hindi.pdf',
+                filename: 'Constitution_of_India_Hindi.pdf',
+            },
+        };
+    
+        // Use Hindi PDF when page is in Hindi, otherwise English
+        const pdf = language === 'hi' ? pdfByLanguage.hi : pdfByLanguage.en;
+    
+        const link = document.createElement('a');
+        link.href = pdf.href;
+        link.setAttribute('download', pdf.filename);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     };
 
     const handleAIChat = async () => {
