@@ -4,6 +4,7 @@ import com.nyaysetu.backend.dto.CaseDTO;
 import com.nyaysetu.backend.dto.CreateCaseRequest;
 import com.nyaysetu.backend.entity.CaseEntity;
 import com.nyaysetu.backend.entity.User;
+import com.nyaysetu.backend.service.CaseManagementService;
 import com.nyaysetu.backend.service.CaseStateTransitionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
