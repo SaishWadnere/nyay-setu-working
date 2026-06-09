@@ -51,6 +51,9 @@ class NotificationWebSocketHandlerTest {
         WebSocketSession sessionA = mock(WebSocketSession.class);
         WebSocketSession sessionB = mock(WebSocketSession.class);
 
+        when(sessionA.isOpen()).thenReturn(true);
+        when(sessionB.isOpen()).thenReturn(true);
+
         authenticateSession(sessionA, "A", "token-1", 1L);
         authenticateSession(sessionB, "B", "token-1", 1L);
 
@@ -66,6 +69,8 @@ class NotificationWebSocketHandlerTest {
     void disconnectingOneSessionDoesNotRemoveOtherActiveSession() throws Exception {
         WebSocketSession sessionA = mock(WebSocketSession.class);
         WebSocketSession sessionB = mock(WebSocketSession.class);
+
+        when(sessionB.isOpen()).thenReturn(true);
 
         authenticateSession(sessionA, "A", "token-1", 1L);
         authenticateSession(sessionB, "B", "token-1", 1L);
@@ -127,6 +132,8 @@ class NotificationWebSocketHandlerTest {
     void singleSessionStillWorks() throws Exception {
         WebSocketSession session = mock(WebSocketSession.class);
 
+        when(session.isOpen()).thenReturn(true);
+
         authenticateSession(session, "A", "token-1", 1L);
         clearInvocations(session);
 
@@ -140,13 +147,11 @@ class NotificationWebSocketHandlerTest {
                                      String token,
                                      long userId) throws Exception {
         when(session.getId()).thenReturn(sessionId);
-        when(session.isOpen()).thenReturn(true);
         when(jwtService.extractUsername(token)).thenReturn("user@example.com");
         when(userDetailsService.loadUserByUsername("user@example.com")).thenReturn(userDetails);
         when(jwtService.isTokenValid(token, userDetails)).thenReturn(true);
         when(userRepository.findByEmail("user@example.com")).thenReturn(Optional.of(user));
         when(user.getId()).thenReturn(userId);
-        when(user.getEmail()).thenReturn("user@example.com");
 
         handler.afterConnectionEstablished(session);
         handler.handleTextMessage(session, new TextMessage("{\"type\":\"AUTH\",\"token\":\"" + token + "\"}"));
