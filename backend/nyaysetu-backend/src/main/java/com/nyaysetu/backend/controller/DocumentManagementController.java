@@ -196,11 +196,15 @@ public class DocumentManagementController {
             userRole = "PETITIONER";
         } else if (user.getEmail().equals(caseData.getRespondentEmail())) {
             userRole = "RESPONDENT";
+        } else if (caseData.getLawyerId() != null && caseData.getLawyerId().equals(user.getId())) {
+            userRole = "LAWYER";
         }
+
+        boolean isCaseLawyer = caseData.getLawyerId() != null && caseData.getLawyerId().equals(user.getId());
         
         // Get filtered documents based on role
         List<DocumentDto> documents = documentManagementService.getCaseDocumentsWithAccessControl(
-            caseId, user.getId(), userRole
+            caseId, user.getId(), userRole, isCaseLawyer
         );
         return ResponseEntity.ok(documents);
     }
@@ -265,7 +269,7 @@ public class DocumentManagementController {
                             "attachment; filename=\"Certificate_" + id + ".pdf\"")
                     .body(pdfBytes);
         } catch (Exception e) {
-            e.printStackTrace(); // Log stack trace to console
+            log.error("Certificate generation failed for document {}", id, e);
             return ResponseEntity.status(500).body(Map.of("error", "Certificate generation failed: " + e.getMessage()));
         }
     }
